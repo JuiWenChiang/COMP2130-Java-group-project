@@ -5,20 +5,21 @@
 *.class
 
 # IDE-specific files
-.idea/                  # IntelliJ IDEA
-.vscode/                # VS Code
-.project                # Eclipse
-.classpath              # Eclipse
-.settings/              # Eclipse
-*.launch                # Eclipse launch configurations
-*.iml                   # IntelliJ IDEA module files
-*.ipr                   # IntelliJ IDEA project files
-*.iws                   # IntelliJ IDEA workspace files
+.idea
+.idea/  
+.vscode/
+.project
+.classpath 
+.settings/ 
+*.launch
+*.iml
+*.ipr
+*.iws
 
 # Maven/Gradle specific files
-/target/                # Maven
-.gradle/                # Gradle
-build/                  # Gradle
+/target/
+.gradle/
+build/  
 *.jar
 *.war
 *.ear
