@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="15.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.controller.EmployeeDetailsController"
+      prefWidth="500.0">
+    <padding>
+        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+    </padding>
+
+    <!-- Title -->
+    <Label text="Employee Details">
+        <font>
+            <Font name="System Bold" size="18.0"/>
+        </font>
+    </Label>
+
+    <Separator/>
+
+    <!-- Employee Details -->
+    <GridPane hgap="15.0" vgap="12.0">
+        <columnConstraints>
+            <ColumnConstraints minWidth="140.0" prefWidth="140.0"/>
+            <ColumnConstraints minWidth="300.0" prefWidth="300.0" hgrow="ALWAYS"/>
+        </columnConstraints>
+
+        <!-- Personal Information -->
+        <Label text="Employee ID:" GridPane.columnIndex="0" GridPane.rowIndex="0"
+               style="-fx-font-weight: bold;"/>
+        <Label fx:id="employeeIdLabel" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <Label text="Full Name:" GridPane.columnIndex="0" GridPane.rowIndex="1"
+               style="-fx-font-weight: bold;"/>
+        <Label fx:id="fullNameLabel" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <Label text="First Name:" GridPane.columnIndex="0" GridPane.rowIndex="2"
+               style="-fx-font-weight: bold;"/>
+        <Label fx:id="firstNameLabel" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Label text="Last Name:" GridPane.columnIndex="0" GridPane.rowIndex="3"
+               style="-fx-font-weight: bold;"/>
+        <Label fx:id="lastNameLabel" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+        <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="4"
+               style="-fx-font-weight: bold;"/>
+        <Label fx:id="emailLabel" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+        <Label text="Phone:" GridPane.columnIndex="0" GridPane.rowIndex="5"
+               style="-fx-font-weight: bold;"/>
+        <Label fx:id="phoneLabel" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+        <!-- Employment Information -->
+        <Separator GridPane.columnIndex="0" GridPane.rowIndex="6" GridPane.columnSpan="2"/>
+
+        <Label text="Department ID:" GridPane.columnIndex="0" GridPane.rowIndex="7"
+               style="-fx-font-weight: bold;"/>
+        <Label fx:id="departmentIdLabel" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+
+        <Label text="Position:" GridPane.columnIndex="0" GridPane.rowIndex="8"
+               style="-fx-font-weight: bold;"/>
+        <Label fx:id="positionLabel" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+
+        <Label text="Hire Date:" GridPane.columnIndex="0" GridPane.rowIndex="9"
+               style="-fx-font-weight: bold;"/>
+        <Label fx:id="hireDateLabel" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
+    </GridPane>
+
+    <Separator/>
+
+    <!-- Close Button -->
+    <HBox spacing="10.0" alignment="CENTER_RIGHT">
+        <Button text="Close" onAction="#handleClose" prefWidth="100.0"
+                style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
+    </HBox>
+</VBox>

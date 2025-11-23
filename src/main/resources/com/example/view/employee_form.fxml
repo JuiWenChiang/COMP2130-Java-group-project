@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="15.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.controller.EmployeeFormController"
+      prefWidth="500.0">
+    <padding>
+        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+    </padding>
+
+    <!-- Form Title -->
+    <Label fx:id="formTitle" text="Add New Employee">
+        <font>
+            <Font name="System Bold" size="18.0"/>
+        </font>
+    </Label>
+
+    <Separator/>
+
+    <!-- Form Fields -->
+    <GridPane hgap="10.0" vgap="15.0">
+        <columnConstraints>
+            <ColumnConstraints minWidth="120.0" prefWidth="120.0"/>
+            <ColumnConstraints minWidth="300.0" prefWidth="300.0" hgrow="ALWAYS"/>
+        </columnConstraints>
+
+        <!-- Personal Information -->
+        <Label text="First Name: *" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="firstNameField" promptText="Enter first name" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <Label text="Last Name: *" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextField fx:id="lastNameField" promptText="Enter last name" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <Label text="Email: *" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <TextField fx:id="emailField" promptText="employee@company.com" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Label text="Phone:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <TextField fx:id="phoneField" promptText="416-555-0123" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+        <!-- Employment Information -->
+        <Label text="Department: *" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+        <ComboBox fx:id="departmentComboBox" promptText="Select department" GridPane.columnIndex="1" GridPane.rowIndex="4" maxWidth="Infinity"/>
+
+        <Label text="Position: *" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+        <TextField fx:id="positionField" promptText="Job title" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+        <Label text="Hire Date: *" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+        <DatePicker fx:id="hireDatePicker" promptText="Select hire date" GridPane.columnIndex="1" GridPane.rowIndex="6" maxWidth="Infinity"/>
+    </GridPane>
+
+    <!-- Error Label -->
+    <Label fx:id="errorLabel" textFill="red" wrapText="true" visible="false"/>
+
+    <Separator/>
+
+    <!-- Action Buttons -->
+    <HBox spacing="10.0" alignment="CENTER_RIGHT">
+        <Button text="Cancel" onAction="#handleCancel" prefWidth="100.0"/>
+        <Button fx:id="saveButton" text="Save" onAction="#handleSave" prefWidth="100.0"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <!-- Required Fields Note -->
+    <Label text="* Required fields" textFill="#999999">
+        <font>
+            <Font size="11.0"/>
+        </font>
+    </Label>
+</VBox>
