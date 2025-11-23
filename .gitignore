@@ -1,3 +1,6 @@
+# Database
+src/main/resources/db/db.properties
+
 # Compiled output
 /bin/
 /build/

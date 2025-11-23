@@ -1,0 +1,14 @@
+# Please, copy me and name as db.properties and fill with real values!
+
+# Database connection settings
+db.url=jdbc:postgresql://localhost:5432/hr_payroll_db
+db.username=postgres
+db.password=<your_password>
+
+# Connection pool settings
+db.max.connections=10
+db.connection.timeout=30000
+
+# Application settings
+app.tax.federal.rate=0.15
+app.tax.provincial.rate=0.05
