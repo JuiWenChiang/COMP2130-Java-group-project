@@ -12,16 +12,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.sql.SQLException;
 
-public class EmployeeManagementController {
-
-    @FXML private TextField searchField;
-    @FXML private ComboBox<String> departmentFilter;
-    @FXML private ComboBox<String> employeeTypeFilter;
-    @FXML private TableView<Employee> employeeTable;
-    @FXML private Label statusLabel;
+public class EmployeeManagementController extends BaseController{
+    @FXML
+    private TextField searchField;
+    @FXML
+    private ComboBox<String> departmentFilter;
+    @FXML
+    private ComboBox<String> employeeTypeFilter;
+    @FXML
+    private TableView<Employee> employeeTable;
+    @FXML
+    private Label statusLabel;
 
     private ObservableList<Employee> employeeList = FXCollections.observableArrayList();
     private EmployeeDAO employeeDAO = new EmployeeDAOImpl();
@@ -34,14 +37,12 @@ public class EmployeeManagementController {
 
     private void setupFilters() {
         ObservableList<String> departments = FXCollections.observableArrayList(
-            "All Departments", "Engineering", "Sales", "Marketing", "HR", "Finance"
-        );
+                "All Departments", "Engineering", "Sales", "Marketing", "HR", "Finance");
         departmentFilter.setItems(departments);
         departmentFilter.setValue("All Departments");
 
         ObservableList<String> types = FXCollections.observableArrayList(
-            "All Types", "Hourly", "Salaried", "Contract", "Commission"
-        );
+                "All Types", "Hourly", "Salaried", "Contract", "Commission");
         employeeTypeFilter.setItems(types);
         employeeTypeFilter.setValue("All Types");
     }

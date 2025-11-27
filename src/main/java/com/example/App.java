@@ -14,6 +14,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        // The start page will be replaced with the previously discussed report page (Howard's).
         scene = new Scene(loadFXML("view/employee_management"), 1024, 768);
         stage.setScene(scene);
         stage.setTitle("HR Employee Management System");
@@ -22,11 +23,12 @@ public class App extends Application {
         stage.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
+    public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
-    private static Parent loadFXML(String fxml) throws IOException {
+    public static Parent loadFXML(String fxml) throws IOException {
+        System.out.println("----------------- Loading page: " + fxml + ".fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
@@ -34,5 +36,4 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
-
 }
