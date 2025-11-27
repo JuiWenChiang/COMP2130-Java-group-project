@@ -25,12 +25,12 @@ CREATE TABLE payrolls (
     payroll_id SERIAL PRIMARY KEY,
     employee_id INTEGER UNIQUE NOT NULL REFERENCES employees(employee_id) ON DELETE CASCADE,
     total_regular_hours NUMERIC(10, 2) NOT NULL DEFAULT 0.00,
-    total_overtime_hours NUMERIC(10, 2) DEFAULT 0.00,
-    total_holiday_bonus NUMERIC(10, 2) DEFAULT 0.00,
-    total_commission NUMERIC(6, 2) DEFAULT 0.00,
-    total_gross_pay NUMERIC(6, 2) DEFAULT 0.00,
-    total_employment_insurance NUMERIC(10, 2) DEFAULT 0.00,
-    total_income_tax NUMERIC(10, 2) DEFAULT 0.00,
+    total_overtime_hours NUMERIC(10, 2)  NOT NULLDEFAULT 0.00,
+    total_holiday_bonus NUMERIC(10, 2)  NOT NULL DEFAULT 0.00,
+    total_commission NUMERIC(6, 2)  NOT NULL DEFAULT 0.00,
+    total_gross_pay NUMERIC(6, 2)  NOT NULL DEFAULT 0.00,
+    total_employment_insurance NUMERIC(10, 2)  NOT NULL DEFAULT 0.00,
+    total_income_tax NUMERIC(10, 2)  NOT NULL DEFAULT 0.00,
     total_net_pay NUMERIC(10, 2) DEFAULT 0.00,    
 );
 
