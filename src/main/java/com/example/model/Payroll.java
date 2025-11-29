@@ -13,6 +13,14 @@ public class Payroll implements Serializable {
     private double totalEmploymentInsurance;
     private double totalIncomeTax;
     private double totalNetPay;
+    public double regularHours;
+    public double overtimeHours;
+    public double holidayBonus;
+    public double commission;
+    public double grossPay;
+    public double employmentInsurance;
+    public double incomeTax;
+    public double netPay;
 
     // Default constructor
     public Payroll() {

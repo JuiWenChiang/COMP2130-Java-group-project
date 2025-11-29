@@ -15,13 +15,14 @@ public interface PayrollDAO {
      */
     Payroll getPayrollByEmployeeId(int employeeId) throws SQLException;
 
-    // /**
-    //  * Check if payroll exists for employee
-    //  * @param employeeId The employee ID
-    //  * @return true if exists, false otherwise
-    //  * @throws SQLException if a database error occurs
-    //  */
-    // boolean existsPayroll(int employeeId) throws SQLException;
+    /**
+     * Check if payroll exists for employee by ID and name
+     * @param employeeId The employee ID
+     * @param employeeName The employee name
+     * @return true if payroll exists for the given employee, false otherwise
+     * @throws SQLException if a database error occurs
+     */
+    boolean existsPayroll(int employeeId, String employeeName) throws SQLException;
 
     /**
      * Add a new payroll

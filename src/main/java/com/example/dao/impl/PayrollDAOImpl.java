@@ -1,14 +1,18 @@
 package com.example.dao.impl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.example.dao.PayrollDAO;
 import com.example.model.Payroll;
 import com.example.util.DatabaseConnection;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-
-public class PayrollDAOImp implements PayrollDAO {
+public class PayrollDAOImpl implements PayrollDAO {
 
     @Override
     public List<Payroll> getAllPayrolls() throws SQLException {
@@ -46,22 +50,42 @@ public class PayrollDAOImp implements PayrollDAO {
     }
 
     @Override
-    public int addPayroll(Payroll payroll) throws SQLException {
-        String sql = "INSERT INTO payrolls (total_regular_hours, total_overtime_hours, total_holiday_bonus, total_commission, total_gross_pay, total_employment_insurance,total_income_tax, total_net_pay)"
-                +
-                "VALUES (?,?,?,?,?,?,?,?)";
+    public boolean existsPayroll(int employeeId, String employeeName) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM Payroll p " +
+                "INNER JOIN Employee e ON p.employee_id = e.employee_id " +
+                "WHERE p.employee_id = ? AND e.employee_name = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            pstmt.setInt(1, employeeId);
+            pstmt.setString(2, employeeName);
 
-            pstmt.setDouble(1, payroll.getTotalRegularHours());
-            pstmt.setDouble(2, payroll.getTotalOvertimeHours());
-            pstmt.setDouble(3, payroll.getTotalHolidayBonus());
-            pstmt.setDouble(4, payroll.getTotalCommission());
-            pstmt.setDouble(5, payroll.getTotalGrossPay());
-            pstmt.setDouble(6, payroll.getTotalEmploymentInsurance());
-            pstmt.setDouble(7, payroll.getTotalIncomeTax());
-            pstmt.setDouble(8, payroll.getTotalNetPay());
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int addPayroll(Payroll payroll) throws SQLException {
+        String sql = "INSERT INTO payrolls (employee_id, total_regular_hours, total_overtime_hours, total_holiday_bonus, total_commission, total_gross_pay, total_employment_insurance,total_income_tax, total_net_pay)"
+                +
+                "VALUES (?,?,?,?,?,?,?,?,?)";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            pstmt.setDouble(1, payroll.getEmployeeId());
+            pstmt.setDouble(2, payroll.getTotalRegularHours());
+            pstmt.setDouble(3, payroll.getTotalOvertimeHours());
+            pstmt.setDouble(4, payroll.getTotalHolidayBonus());
+            pstmt.setDouble(5, payroll.getTotalCommission());
+            pstmt.setDouble(6, payroll.getTotalGrossPay());
+            pstmt.setDouble(7, payroll.getTotalEmploymentInsurance());
+            pstmt.setDouble(8, payroll.getTotalIncomeTax());
+            pstmt.setDouble(9, payroll.getTotalNetPay());
 
             int affectedRows = pstmt.executeUpdate();
 
@@ -81,13 +105,13 @@ public class PayrollDAOImp implements PayrollDAO {
 
     @Override
     public boolean updatePayroll(Payroll payroll) throws SQLException {
-        String sql = "UPDATE employees SET total_regular_hours = ?, total_overtime_hours = ?, "
+        String sql = "UPDATE payrolls SET total_regular_hours = ?, total_overtime_hours = ?, "
                 +
                 "total_holiday_bonus = ?, total_commission = ?, total_gross_pay = ?,"
                 +
                 "total_employment_insurance = ?, total_income_tax = ?, total_net_pay = ? "
                 +
-                "WHERE employee_id = ?";
+                "WHERE payroll_id = ? AND employee_id = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -100,7 +124,8 @@ public class PayrollDAOImp implements PayrollDAO {
             pstmt.setDouble(6, payroll.getTotalEmploymentInsurance());
             pstmt.setDouble(7, payroll.getTotalIncomeTax());
             pstmt.setDouble(8, payroll.getTotalNetPay());
-            pstmt.setInt(8, payroll.getEmployeeId());
+            pstmt.setInt(9, payroll.getPayrollId());
+            pstmt.setInt(10, payroll.getEmployeeId());
 
             int affectedRows = pstmt.executeUpdate();
             return affectedRows > 0;
@@ -109,7 +134,7 @@ public class PayrollDAOImp implements PayrollDAO {
 
     @Override
     public boolean deletePayroll(int payrollId) throws SQLException {
-        String sql = "DELETE FROM payroll WHERE payroll_id = ?";
+        String sql = "DELETE FROM payrolls WHERE payroll_id = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -134,6 +159,6 @@ public class PayrollDAOImp implements PayrollDAO {
                 rs.getDouble("total_gross_pay"),
                 rs.getDouble("total_employment_insurance"),
                 rs.getDouble("total_income_tax"),
-                rs.getDouble("total_inctotal_net_payome_tax"));
+                rs.getDouble("total_net_pay"));
     }
 }

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="15.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.example.controller.PayrollController">
+    <padding>
+        <Insets top="10.0" right="10.0" bottom="10.0" left="10.0" />
+    </padding>
+
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="10.0">
+        <Label text="Payroll">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+        <Region HBox.hgrow="ALWAYS" />
+        <Button text="Employee Management Page" onAction="#switchToEmployeeManagement"
+            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </Button>
+    </HBox>
+
+    <!-- Search and Filter -->
+    <HBox spacing="10.0" alignment="CENTER_LEFT">
+        <Label text="Employee ID:" />
+        <TextField fx:id="searchField" promptText="Search by ID" prefWidth="100.0" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button text="Search Employee" onAction="#handleSearch" />
+    </HBox>
+    <Separator />
+
+    <!-- Form Section -->
+    <ScrollPane fx:id="payrollPane" fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent;">
+        <VBox spacing="20">
+
+            <VBox spacing="15" alignment="CENTER">
+                <GridPane hgap="20" vgap="15" alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="170" prefWidth="120" />
+                        <ColumnConstraints minWidth="200" prefWidth="250" />
+                        <ColumnConstraints minWidth="170" prefWidth="120" />
+                        <ColumnConstraints minWidth="200" prefWidth="250" />
+                    </columnConstraints>
+
+                    <Label text="Employee Nmae" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <Label fx:id="employeeNmaeLabel" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <Label text="Position" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                    <Label fx:id="employeePositionLabel" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+
+                    <Label text="Pay Rate" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <Label fx:id="payRateLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <Label text="Overtime Rate" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                    <Label fx:id="overtimeRateLabel" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                </GridPane>
+            </VBox>
+
+            <!-- Paytoll Information Section -->
+            <VBox spacing="15" alignment="CENTER">
+                <GridPane hgap="20" vgap="15" alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="170" prefWidth="120" />
+                        <ColumnConstraints minWidth="200" prefWidth="250" />
+                        <ColumnConstraints minWidth="170" prefWidth="120" />
+                        <ColumnConstraints minWidth="200" prefWidth="250" />
+                    </columnConstraints>
+
+                    <Label text="Regular Hours (0 to 2288)" GridPane.columnIndex="0"
+                        GridPane.rowIndex="0" />
+                    <TextField fx:id="totalRegularHours" GridPane.columnIndex="1"
+                        GridPane.rowIndex="0" />
+                    <Label text="Overtime Hours (0 to 208)" GridPane.columnIndex="2"
+                        GridPane.rowIndex="0" />
+                    <TextField fx:id="totalOvertimeHours" GridPane.columnIndex="3"
+                        GridPane.rowIndex="0" />
+
+                    <Label text="Holiday Bonus (0 to 100000)" GridPane.columnIndex="0"
+                        GridPane.rowIndex="1" />
+                    <TextField fx:id="totalHolidayBonus" GridPane.columnIndex="1"
+                        GridPane.rowIndex="1" />
+                    <Label text="Commission (0 to 100000)" GridPane.columnIndex="2"
+                        GridPane.rowIndex="1" />
+                    <TextField fx:id="totalCommission" GridPane.columnIndex="3"
+                        GridPane.rowIndex="1" />
+
+                    <Label text="Gross Pay" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <Label fx:id="grossPayLabel" text="The system calculates automatically."
+                        style="-fx-font-weight: bold;"
+                        GridPane.columnIndex="1"
+                        GridPane.rowIndex="2" />
+                    <Label text="Employment Insurance" GridPane.columnIndex="2"
+                        GridPane.rowIndex="2" />
+                    <Label fx:id="employmentInsuranceLabel"
+                        text="The system calculates automatically." style="-fx-font-weight: bold;"
+                        GridPane.columnIndex="3"
+                        GridPane.rowIndex="2" />
+
+                    <Label text="Income Tax" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <Label fx:id="incomeTaxLabel" text="The system calculates automatically."
+                        style="-fx-font-weight: bold;"
+                        GridPane.columnIndex="1"
+                        GridPane.rowIndex="3" />
+                    <Label text="Net Pay" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                    <Label fx:id="netPayLabel" text="The system calculates automatically."
+                        style="-fx-font-weight: bold;"
+                        GridPane.columnIndex="3"
+                        GridPane.rowIndex="3" />
+                </GridPane>
+            </VBox>
+            <Separator />
+
+            <!-- Button Section -->
+            <VBox spacing="15" alignment="CENTER">
+                <HBox spacing="15" alignment="BASELINE_RIGHT">
+                    <Button text="Calculate" prefWidth="100" prefHeight="20"
+                        onAction="#handleCalculate"
+                        style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-size: 12px; -fx-padding: 5 10;">
+                    </Button>
+                    <Button text="Save" prefWidth="100" prefHeight="20" onAction="#handleSavePayroll"
+                        style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 12px; -fx-padding: 5 10;">
+                    </Button>
+                    <Button text="Delete" prefWidth="100" prefHeight="20"
+                        onAction="#handleDeletePayroll"
+                        style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 12px; -fx-padding: 5 10;">
+                    </Button>
+                </HBox>
+            </VBox>
+        </VBox>
+    </ScrollPane>
+</VBox>
