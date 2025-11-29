@@ -1,6 +1,7 @@
 package com.example.dao;
 
 import com.example.model.Department;
+import com.example.model.Employee;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -52,4 +53,12 @@ public interface DepartmentDAO {
      * @throws SQLException if database error occurs
      */
     int getDepartmentCount() throws SQLException;
+
+    /**
+     * Search department by name
+     * @param departmentName The department name
+     * @return List of matching department
+     * @throws SQLException if a database error occurs
+     */
+    List<Employee> searchDepartmentByName(String departmentName) throws SQLException;
 }

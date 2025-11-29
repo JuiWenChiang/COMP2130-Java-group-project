@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<VBox spacing="15.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.example.controller.ReportController">
+    <padding>
+        <Insets top="10.0" right="10.0" bottom="10.0" left="10.0" />
+    </padding>
+
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="10.0">
+        <Label text="Report">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+        <Region HBox.hgrow="ALWAYS" />
+        <Button text="Payroll Page" onAction="#switchToPayroll"
+            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </Button>
+        <Button text="Employee Management Page" onAction="#switchToEmployeeManagement"
+            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </Button>
+    </HBox>
+
+    <!-- Search Section -->
+    <VBox spacing="15">
+        <HBox spacing="15" alignment="CENTER_LEFT">
+            <Label text="Search Type:" minWidth="80" />
+            <RadioButton fx:id="employeeRadio" text="Employee" selected="true">
+                <toggleGroup>
+                    <ToggleGroup fx:id="searchTypeGroup" />
+                </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="departmentRadio" text="Department" toggleGroup="$searchTypeGroup" />
+        </HBox>
+
+        <HBox spacing="15" alignment="CENTER_LEFT">
+            <StackPane>
+                <HBox fx:id="employeeSearchBox" spacing="15" alignment="CENTER_LEFT">
+                    <Label text="Employee ID:" minWidth="80" />
+                    <TextField fx:id="employeeIdField" prefWidth="200" />
+                    <Label text="Employee Name:" minWidth="80" />
+                    <TextField fx:id="employeeNameField" prefWidth="200" />
+                </HBox>
+                <HBox fx:id="departmentSearchBox" spacing="15" alignment="CENTER_LEFT"
+                    visible="false"
+                    managed="false">
+                    <Label text="Department:" minWidth="80" />
+                    <ComboBox fx:id="departmentComboBox" prefWidth="200" />
+                </HBox>
+            </StackPane>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button text="Refresh" />
+        </HBox>
+    </VBox>
+    <Separator />
+
+    <!-- If the query one employee, displays the following content -->
+    <ScrollPane fx:id="employeeScrollPane" fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent;">
+        <VBox spacing="20">
+            <VBox spacing="15" alignment="CENTER">
+                <GridPane hgap="20" vgap="15" alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="120" prefWidth="120" />
+                        <ColumnConstraints minWidth="250" prefWidth="250" />
+                        <ColumnConstraints minWidth="120" prefWidth="120" />
+                        <ColumnConstraints minWidth="250" prefWidth="250" />
+                    </columnConstraints>
+
+                    <Label text="Employee ID: " style="-fx-font-weight: bold;"
+                        GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <Label text="Employee ID...." GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <Label text="Position: " style="-fx-font-weight: bold;"
+                        GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                    <Label text="Position...." GridPane.columnIndex="3" GridPane.rowIndex="0" />
+
+                    <Label text="First Name : " style="-fx-font-weight: bold;"
+                        GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <Label text="First Name...." GridPane.columnIndex="1"
+                        GridPane.rowIndex="1" />
+                    <Label text="Last Name: " style="-fx-font-weight: bold;"
+                        GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                    <Label text="Last Name..." GridPane.columnIndex="3" GridPane.rowIndex="1" />
+
+                    <Label text="Email: " style="-fx-font-weight: bold;"
+                        GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <Label text="Email...." GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <Label text="Phone: " style="-fx-font-weight: bold;"
+                        GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                    <Label text="Phone...." GridPane.columnIndex="3" GridPane.rowIndex="2" />
+
+                    <Label text="Total Gross Pay: " style="-fx-font-weight: bold;"
+                        GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <Label text="Total Gross Pay...." GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <Label text="Total Net Pay: " style="-fx-font-weight: bold;"
+                        GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                    <Label text="Total Net Pay...." GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                </GridPane>
+            </VBox>
+        </VBox>
+    </ScrollPane>
+
+    <!-- If the query department, displays the following content -->
+    <ScrollPane fx:id="departmentScrollPane" fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent;">
+        <VBox spacing="20">
+            <VBox spacing="15" alignment="CENTER">
+                <GridPane hgap="20" vgap="15" alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="120" prefWidth="120" />
+                        <ColumnConstraints minWidth="250" prefWidth="250" />
+                        <ColumnConstraints minWidth="120" prefWidth="120" />
+                        <ColumnConstraints minWidth="250" prefWidth="250" />
+                    </columnConstraints>
+
+                    <Label text="Department Name: " style="-fx-font-weight: bold;"
+                        GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <Label text="DepartmentName...." GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                    <Label text="Department Introduction: " style="-fx-font-weight: bold;"
+                        GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <Label text="DepartmentIntroduction...." GridPane.columnIndex="1"
+                        GridPane.rowIndex="1" />
+
+                    <Label text="Number of Employees: " style="-fx-font-weight: bold;"
+                        GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <Label text="1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                </GridPane>
+            </VBox>
+
+            <TableView fx:id="reportEmployeeTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn text="ID" prefWidth="50.0">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="employeeId" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="First Name" prefWidth="120.0">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="firstName" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Last Name" prefWidth="120.0">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="lastName" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Email" prefWidth="200.0">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="email" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Phone" prefWidth="120.0">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="phone" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Position" prefWidth="150.0">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="position" />
+                        </cellValueFactory>
+                    </TableColumn>
+                </columns>
+            </TableView>
+        </VBox>
+    </ScrollPane>
+
+</VBox>

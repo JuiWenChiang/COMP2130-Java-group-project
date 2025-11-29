@@ -29,9 +29,8 @@ public class BaseController {
         App.setRoot("view/payroll"); // Keep the scene size unchanged
     }
 
-    // Reservation (name can be changed)
-    // @FXML
-    // protected void switchToReport(ActionEvent event) {
-    // switchToView("view/report");
-    // }
+    @FXML
+    private void switchToReport(ActionEvent event) throws IOException {
+        App.setRoot("view/report");
+    }
 }

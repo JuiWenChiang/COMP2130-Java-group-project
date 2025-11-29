@@ -7,45 +7,59 @@
 <?import javafx.scene.text.Font?>
 
 <VBox spacing="15.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.controller.EmployeeManagementController">
+    fx:controller="com.example.controller.EmployeeManagementController">
     <padding>
-        <Insets top="10.0" right="10.0" bottom="10.0" left="10.0"/>
+        <Insets top="10.0" right="10.0" bottom="10.0" left="10.0" />
     </padding>
 
     <!-- Header -->
     <HBox alignment="CENTER_LEFT" spacing="10.0">
         <Label text="Employee Management">
             <font>
-                <Font name="System Bold" size="20.0"/>
+                <Font name="System Bold" size="20.0" />
             </font>
         </Label>
-        <Region HBox.hgrow="ALWAYS"/>
-        <Button text="+ Add Employee" onAction="#handleAddEmployee"
-                style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;">
+        <Region HBox.hgrow="ALWAYS" />
+        <Button text="Payroll Page" onAction="#switchToPayroll"
+            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;">
             <font>
-                <Font size="13.0"/>
+                <Font size="13.0" />
+            </font>
+        </Button>
+
+        <Button text="Report Page" onAction="#switchToReport"
+            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </Button>
+
+        <Button text="+ Add Employee" onAction="#handleAddEmployee"
+            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;">
+            <font>
+                <Font size="13.0" />
             </font>
         </Button>
     </HBox>
 
-    <Separator/>
+    <Separator />
 
     <!-- Search and Filter -->
     <HBox spacing="10.0" alignment="CENTER_LEFT">
-        <Label text="Search:"/>
+        <Label text="Search:" />
         <TextField fx:id="searchField" promptText="Search by name, email..." prefWidth="250.0"
-                   onKeyReleased="#handleSearch"/>
+            onKeyReleased="#handleSearch" />
 
-        <Label text="Department:"/>
+        <Label text="Department:" />
         <ComboBox fx:id="departmentFilter" promptText="All Departments" prefWidth="150.0"
-                  onAction="#handleFilter"/>
+            onAction="#handleFilter" />
 
-        <Label text="Type:"/>
+        <Label text="Type:" />
         <ComboBox fx:id="employeeTypeFilter" promptText="All Types" prefWidth="130.0"
-                  onAction="#handleFilter"/>
+            onAction="#handleFilter" />
 
-        <Region HBox.hgrow="ALWAYS"/>
-        <Button text="Refresh" onAction="#handleRefresh"/>
+        <Region HBox.hgrow="ALWAYS" />
+        <Button text="Refresh" onAction="#handleRefresh" />
     </HBox>
 
     <!-- Employee Table -->
@@ -53,37 +67,37 @@
         <columns>
             <TableColumn text="ID" prefWidth="50.0">
                 <cellValueFactory>
-                    <PropertyValueFactory property="employeeId"/>
+                    <PropertyValueFactory property="employeeId" />
                 </cellValueFactory>
             </TableColumn>
             <TableColumn text="First Name" prefWidth="120.0">
                 <cellValueFactory>
-                    <PropertyValueFactory property="firstName"/>
+                    <PropertyValueFactory property="firstName" />
                 </cellValueFactory>
             </TableColumn>
             <TableColumn text="Last Name" prefWidth="120.0">
                 <cellValueFactory>
-                    <PropertyValueFactory property="lastName"/>
+                    <PropertyValueFactory property="lastName" />
                 </cellValueFactory>
             </TableColumn>
             <TableColumn text="Email" prefWidth="200.0">
                 <cellValueFactory>
-                    <PropertyValueFactory property="email"/>
+                    <PropertyValueFactory property="email" />
                 </cellValueFactory>
             </TableColumn>
             <TableColumn text="Phone" prefWidth="120.0">
                 <cellValueFactory>
-                    <PropertyValueFactory property="phone"/>
+                    <PropertyValueFactory property="phone" />
                 </cellValueFactory>
             </TableColumn>
             <TableColumn text="Position" prefWidth="150.0">
                 <cellValueFactory>
-                    <PropertyValueFactory property="position"/>
+                    <PropertyValueFactory property="position" />
                 </cellValueFactory>
             </TableColumn>
             <TableColumn text="Hire Date" prefWidth="120.0">
                 <cellValueFactory>
-                    <PropertyValueFactory property="hireDate"/>
+                    <PropertyValueFactory property="hireDate" />
                 </cellValueFactory>
             </TableColumn>
         </columns>
@@ -91,17 +105,17 @@
 
     <!-- Action Buttons -->
     <HBox spacing="10.0" alignment="CENTER_RIGHT">
-        <Button text="View Details" onAction="#handleViewDetails" prefWidth="120.0"/>
+        <Button text="View Details" onAction="#handleViewDetails" prefWidth="120.0" />
         <Button text="Edit" onAction="#handleEditEmployee" prefWidth="100.0"
-                style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
+            style="-fx-background-color: #2196F3; -fx-text-fill: white;" />
         <Button text="Delete" onAction="#handleDeleteEmployee" prefWidth="100.0"
-                style="-fx-background-color: #f44336; -fx-text-fill: white;"/>
+            style="-fx-background-color: #f44336; -fx-text-fill: white;" />
     </HBox>
 
     <!-- Status Label -->
     <Label fx:id="statusLabel" text="Total Employees: 0" textFill="#666666">
         <font>
-            <Font size="12.0"/>
+            <Font size="12.0" />
         </font>
     </Label>
 </VBox>
