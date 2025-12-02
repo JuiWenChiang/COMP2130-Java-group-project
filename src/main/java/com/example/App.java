@@ -14,8 +14,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        // The start page will be replaced with the previously discussed report page (Howard's).
-        scene = new Scene(loadFXML("view/employee_management"), 1024, 768);
+        scene = new Scene(loadFXML("view/report"), 1024, 768);
         stage.setScene(scene);
         stage.setTitle("HR Employee Management System");
         stage.setResizable(true);

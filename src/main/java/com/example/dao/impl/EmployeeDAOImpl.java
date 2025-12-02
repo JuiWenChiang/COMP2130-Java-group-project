@@ -46,6 +46,24 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
+    public List<Employee> getEmployeeByDepartmentId(int departmentId) throws SQLException {
+        List<Employee> employees = new ArrayList<>();
+        String sql = "SELECT * FROM employees WHERE department_id = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, departmentId);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                employees.add(createEmployeeFromResultSet(rs));
+            }
+        }
+
+        return employees;
+    }
+
+    @Override
     public int addEmployee(Employee employee) throws SQLException {
         String sql = "INSERT INTO employees (first_name, last_name, email, phone, " +
                     "department_id, position, hire_date) " +

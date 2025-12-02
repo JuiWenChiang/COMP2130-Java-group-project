@@ -54,9 +54,9 @@
         <ComboBox fx:id="departmentFilter" promptText="All Departments" prefWidth="150.0"
             onAction="#handleFilter" />
 
-        <Label text="Type:" />
+        <!-- <Label text="Type:" />
         <ComboBox fx:id="employeeTypeFilter" promptText="All Types" prefWidth="130.0"
-            onAction="#handleFilter" />
+            onAction="#handleFilter" /> -->
 
         <Region HBox.hgrow="ALWAYS" />
         <Button text="Refresh" onAction="#handleRefresh" />

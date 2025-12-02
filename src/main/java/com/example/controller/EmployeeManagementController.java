@@ -19,8 +19,8 @@ public class EmployeeManagementController extends BaseController{
     private TextField searchField;
     @FXML
     private ComboBox<String> departmentFilter;
-    @FXML
-    private ComboBox<String> employeeTypeFilter;
+    // @FXML
+    // private ComboBox<String> employeeTypeFilter;
     @FXML
     private TableView<Employee> employeeTable;
     @FXML
@@ -41,10 +41,10 @@ public class EmployeeManagementController extends BaseController{
         departmentFilter.setItems(departments);
         departmentFilter.setValue("All Departments");
 
-        ObservableList<String> types = FXCollections.observableArrayList(
-                "All Types", "Hourly", "Salaried", "Contract", "Commission");
-        employeeTypeFilter.setItems(types);
-        employeeTypeFilter.setValue("All Types");
+        // ObservableList<String> types = FXCollections.observableArrayList(
+        //         "All Types", "Hourly", "Salaried", "Contract", "Commission");
+        // employeeTypeFilter.setItems(types);
+        // employeeTypeFilter.setValue("All Types");
     }
 
     private void loadEmployees() {

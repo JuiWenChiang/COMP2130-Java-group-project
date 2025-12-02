@@ -8,15 +8,13 @@ public class Department implements Serializable {
     private int departmentId;
     private String departmentName;
     private String description;
-    private String managerName;
 
     public Department() {}
 
-    public Department(int departmentId, String departmentName, String description, String managerName) {
+    public Department(int departmentId, String departmentName, String description) {
         this.departmentId = departmentId;
         this.departmentName = departmentName;
         this.description = description;
-        this.managerName = managerName;
     }
 
     public int getDepartmentId() {
@@ -41,14 +39,6 @@ public class Department implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getManagerName() {
-        return managerName;
-    }
-
-    public void setManagerName(String managerName) {
-        this.managerName = managerName;
     }
 
     @Override

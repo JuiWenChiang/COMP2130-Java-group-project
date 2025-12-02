@@ -2,7 +2,6 @@ package com.example.controller;
 
 import com.example.model.Employee;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 

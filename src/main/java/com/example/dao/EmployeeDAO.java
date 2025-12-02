@@ -1,6 +1,7 @@
 package com.example.dao;
 
 import com.example.model.Employee;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -15,11 +16,19 @@ public interface EmployeeDAO {
 
     /**
      * Get an employee by ID
-     * @param employeeId The employee ID
+     * @param employeeIdField The employee ID
      * @return The employee, or null if not found
      * @throws SQLException if a database error occurs
      */
-    Employee getEmployeeById(int employeeId) throws SQLException;
+    Employee getEmployeeById(int employeeIdField) throws SQLException;
+
+    /**
+     * Get an department by ID
+     * @param employeeId The department ID
+     * @return The employee, or null if not found
+     * @throws SQLException if a database error occurs
+     */
+    List<Employee> getEmployeeByDepartmentId(int departmentId) throws SQLException;
 
     /**
      * Add a new employee

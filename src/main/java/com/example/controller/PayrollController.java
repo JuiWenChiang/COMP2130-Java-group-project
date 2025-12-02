@@ -1,7 +1,6 @@
 package com.example.controller;
 
 import java.sql.SQLException;
-import java.util.function.UnaryOperator;
 
 import com.example.model.Payroll;
 import com.example.dao.PayrollDAO;
@@ -17,7 +16,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
 import javafx.scene.control.Tooltip;
 import javafx.scene.Node;
 import javafx.util.Duration;
@@ -73,91 +71,16 @@ public class PayrollController extends BaseController {
 
     @FXML
     public void initialize() {
-        setupNumericField(totalRegularHours, 0, 2288);
-        setupNumericField(totalOvertimeHours, 0, 208);
-        setupNumericField(totalHolidayBonus, 0, 100000);
-        setupNumericField(totalCommission, 0, 100000);
+        setupNumericField(totalRegularHours, 0.0, 2288.0);
+        setupNumericField(totalOvertimeHours, 0.0, 208.0);
+        setupNumericField(totalHolidayBonus, 0.00, 100000.0);
+        setupNumericField(totalCommission, 0.0, 100000.0);
 
         payrollPane.setVisible(false);
         payrollPane.setManaged(false);
 
     }
 
-    /* Input Value */
-    private boolean verifyInputType(String type, String value) {
-        if (value == null || value.trim().isEmpty()) {
-            return false;
-        }
-
-        try {
-            switch (type.toLowerCase()) {
-                case "integer":
-                case "int":
-                    Integer.parseInt(value);
-                    return true;
-
-                case "double":
-                case "decimal":
-                    Double.parseDouble(value);
-                    return true;
-
-                case "boolean":
-                    if (!value.equalsIgnoreCase("true") && !value.equalsIgnoreCase("false")) {
-                        return false;
-                    }
-                    return true;
-
-                default:
-                    return true;
-            }
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    private void setupNumericField(TextField textField, double minValue, double maxValue) {
-        UnaryOperator<TextFormatter.Change> filter = change -> {
-            String newText = change.getControlNewText();
-
-            if (newText.isEmpty()) {
-                change.setText("0");
-                change.setRange(0, change.getControlText().length());
-                return change;
-            }
-
-            if (newText.matches("\\d*\\.?\\d*")) {
-                try {
-                    if (!newText.endsWith(".")) {
-                        double value = Double.parseDouble(newText);
-
-                        if (value >= minValue && value <= maxValue) {
-                            return change;
-                        } else {
-                            String newValue = value > maxValue ? String.valueOf(maxValue) : String.valueOf(minValue);
-                            change.setText(newValue);
-                            change.setRange(0, change.getControlText().length());
-                            return change;
-                        }
-                    } else {
-                        return change;
-                    }
-                } catch (NumberFormatException e) {
-                    change.setText("0");
-                    change.setRange(0, change.getControlText().length());
-                    return change;
-                }
-            }
-
-            change.setText("0");
-            change.setRange(0, change.getControlText().length());
-            return change;
-        };
-
-        TextFormatter<String> textFormatter = new TextFormatter<>(filter);
-        textField.setTextFormatter(textFormatter);
-    }
-
-    /* UI Tool */
     private void showTooltip(String message) {
         Node node = totalRegularHours;
         Tooltip tooltip = new Tooltip(message);
@@ -172,15 +95,6 @@ public class PayrollController extends BaseController {
         PauseTransition pause = new PauseTransition(Duration.seconds(3));
         pause.setOnFinished(e -> tooltip.hide());
         pause.play();
-    }
-
-    private Alert showWarning(String message) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Warning");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-        return alert;
     }
 
     /* Calculate */
@@ -267,17 +181,16 @@ public class PayrollController extends BaseController {
 
         if (verifyInputType("int", searchText)) {
             int searchID = Integer.parseInt(searchText);
-            targetEmployeeId = searchID;
             try {
                 Employee employeeInfo = employeeDAO.getEmployeeById(searchID);
                 if (employeeInfo == null) {
-                    showWarning("Employee ID " + searchID + " does not exist.");
+                    showAlertWarning("Employee ID " + searchID + " does not exist.");
                     return;
                 }
 
                 payrollPane.setVisible(true);
                 payrollPane.setManaged(true);
-                
+
                 setEmployeeInfo(employeeInfo);
                 Payroll payroll = payrollDAO.getPayrollByEmployeeId(searchID);
                 if (payroll != null) {
@@ -289,7 +202,7 @@ public class PayrollController extends BaseController {
                 e.printStackTrace();
             }
         } else {
-            showWarning("Input error, please enter an integer ID");
+            showAlertWarning("Input error, please enter an integer ID");
         }
     }
 
@@ -332,13 +245,13 @@ public class PayrollController extends BaseController {
                 payrollDAO.addPayroll(payroll);
             }
         } catch (Exception e) {
-            showWarning(e.getMessage());
+            showAlertWarning(e.getMessage());
         }
     }
 
     @FXML
     private void handleDeletePayroll() {
-        Alert alert = showWarning("Are you sure you want to delete this payroll?");
+        Alert alert = showAlertWarning("Are you sure you want to delete this payroll?");
 
         if (alert.showAndWait().get() == ButtonType.OK) {
             try {
@@ -346,10 +259,10 @@ public class PayrollController extends BaseController {
                 if (success) {
                     showTooltip("Employee deleted successfully");
                 } else {
-                    showWarning("Failed to delete employee from database");
+                    showAlertWarning("Failed to delete employee from database");
                 }
             } catch (SQLException e) {
-                showWarning(e.getMessage());
+                showAlertWarning(e.getMessage());
                 e.printStackTrace();
             }
         }

@@ -33,11 +33,11 @@ public class EmployeeFormController {
 
     private void setupDepartments() {
         // TODO: Load departments from database
-        Department dept1 = new Department(1, "Information Technology", "IT Services and Software Development", null);
-        Department dept2 = new Department(2, "Business Administration", "Business Operations and Management", null);
-        Department dept3 = new Department(3, "Hospitality Services", "Food Services and Event Management", null);
-        Department dept4 = new Department(4, "Student Services", "Student Support and Academic Advising", null);
-        Department dept5 = new Department(5, "Facilities Management", "Campus Maintenance and Operations", null);
+        Department dept1 = new Department(1, "Information Technology", "IT Services and Software Development");
+        Department dept2 = new Department(2, "Business Administration", "Business Operations and Management");
+        Department dept3 = new Department(3, "Hospitality Services", "Food Services and Event Management");
+        Department dept4 = new Department(4, "Student Services", "Student Support and Academic Advising");
+        Department dept5 = new Department(5, "Facilities Management", "Campus Maintenance and Operations");
 
         departmentComboBox.setItems(FXCollections.observableArrayList(dept1, dept2, dept3, dept4, dept5));
     }
