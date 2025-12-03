@@ -17,8 +17,6 @@ CREATE TABLE employees (
     department_id INTEGER REFERENCES departments(department_id),
     position VARCHAR(100),
     hire_date DATE NOT NULL
-    pay_rate NUMERIC(10, 2) DEFAULT 0.00,
-    overtime_rate NUMERIC(10, 2) DEFAULT 0.00
 );
 
 CREATE TABLE payrolls (
@@ -42,13 +40,13 @@ INSERT INTO departments (department_name, description) VALUES
 ('Student Services', 'Student Support and Academic Advising'),
 ('Facilities Management', 'Campus Maintenance and Operations');
 
-INSERT INTO employees (first_name, last_name, email, phone, department_id, position, hire_date,pay_rate,overtime_rate)
+INSERT INTO employees (first_name, last_name, email, phone, department_id, position, hire_date)
 VALUES
-('Aiden', 'Tremblay', 'atremblay@georgebrown.ca', '416-555-2001', 1, 'Junior Developer', '2025-11-01', 28.00, 42.00),
-('Emma', 'Wong', 'ewong@georgebrown.ca', '647-555-2002', 5, 'Maintenance Technician', '2025-11-15', 25.00, 37.50),
-('Liam', 'Kowalski', 'lkowalski@georgebrown.ca', '416-555-2003', 1, 'Senior Developer', '2025-01-10', 45.00, 67.50),
-('Olivia', 'Nguyen', 'onguyen@georgebrown.ca', '647-555-2004', 4, 'Student Advisor', '2025-09-01', 30.00, 45.00),
-('Noah', 'Singh', 'nsingh@georgebrown.ca', '416-555-2005', 3, 'Event Coordinator', '2025-11-01', 32.00, 48.00);
+('Aiden', 'Tremblay', 'atremblay@georgebrown.ca', '416-555-2001', 1, 'Junior Developer', '2025-11-01'),
+('Emma', 'Wong', 'ewong@georgebrown.ca', '647-555-2002', 5, 'Maintenance Technician', '2025-11-15'),
+('Liam', 'Kowalski', 'lkowalski@georgebrown.ca', '416-555-2003', 1, 'Senior Developer', '2025-01-10'),
+('Olivia', 'Nguyen', 'onguyen@georgebrown.ca', '647-555-2004', 4, 'Student Advisor', '2025-09-01'),
+('Noah', 'Singh', 'nsingh@georgebrown.ca', '416-555-2005', 3, 'Event Coordinator', '2025-11-01');
 
 INSERT INTO payrolls ( employee_id, total_regular_hours, total_overtime_hours, total_holiday_bonus, total_commission, total_gross_pay,  total_employment_insurance, total_income_tax, total_net_pay)
 VALUES ( 3, 30.00, 10.00, 500.00, 0.00, 2525.00, 41.26, 187.50, 2296.24);
